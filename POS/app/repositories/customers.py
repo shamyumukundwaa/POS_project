@@ -1,0 +1,10 @@
+from app.models.customers import Customer
+from app.repositories.base import BaseRepository
+
+
+class CustomerRepository(BaseRepository[Customer]):
+    def __init__(self):
+        super().__init__(Customer)
+
+
+customer_repo = CustomerRepository()
