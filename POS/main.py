@@ -52,8 +52,3 @@ app.include_router(receipts.router)
 
 
 @app.get("/", tags=["Heartbeat"])
-def system_check():
-    return {
-        "status": "online",
-        "message": "Coffee shop Till endpoint layer is running perfectly",
-    }
