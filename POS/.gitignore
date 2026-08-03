@@ -4,4 +4,4 @@ env/
 
 *.db
 __pycache__/
-*.py[cod]
+*.py[cod]registration/
