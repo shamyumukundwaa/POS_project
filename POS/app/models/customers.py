@@ -6,10 +6,10 @@ from database import Base
 class Customer(Base):
     __tablename__ = "customers"
 
-    customer_id = Column(Integer, primary_key=True, index=True)
-    full_name = Column(String, nullable=False)
-    phone_number = Column(String, nullable=True)
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True, nullable=False)
+    phone = Column(String, nullable=True)
     email = Column(String, nullable=True)
-    loyalty_points = Column(Integer, default=0, nullable=True)
+    address = Column(String, nullable=True)
 
     sales = relationship("Sale", back_populates="customer")

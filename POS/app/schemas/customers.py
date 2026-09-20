@@ -1,22 +1,25 @@
-from dataclasses import field
-
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
 from typing import Optional
 
 
 class CustomerBase(BaseModel):
-    full_name: str
-    phone_number: Optional[str] = None
-    email: Optional[EmailStr] = None
-    loyalty_points: Optional[int] = field(default=0)
-
+    name: str = Field(min_length=1)
+    phone: str = Field(min_length=1)
+    email: EmailStr | None = None
+    address: str | None = None
 
 class CustomerCreate(CustomerBase):
     pass
 
 
-class CustomerResponse(CustomerBase):
-    customer_id: int
+class CustomerUpdate(BaseModel):
+    name: str | None = Field(default=None, min_length=1)
+    phone: str | None = Field(default=None, min_length=1)
+    email: EmailStr | None = None
+    address: str | None = None
 
-    class Config:
-        from_attributes = True
+
+class CustomerResponse(CustomerBase):
+    id: int
+
+    model_config = ConfigDict(from_attributes=True)
