@@ -1,9 +1,9 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
 from typing import Optional
 
 
 class SupplierBase(BaseModel):
-    company_name: str
+    company_name: str = Field(min_length=1)
     contact_name: Optional[str] = None
     phone_number: Optional[str] = None
     email: Optional[EmailStr] = None
@@ -16,5 +16,7 @@ class SupplierCreate(SupplierBase):
 class SupplierResponse(SupplierBase):
     supplier_id: int
 
-    class Config:
-        from_attributes = True
+
+    
+    model_config = ConfigDict(from_attributes=True)
+    

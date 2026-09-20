@@ -1,7 +1,9 @@
 .venv/
-
 env/
-
 *.db
 __pycache__/
-*.py[cod]registration/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.env

@@ -4,12 +4,15 @@ from typing import List
 from database import get_db
 from app.schemas.payments import PaymentCreate, PaymentResponse
 from app.repositories.payments import payment_repo
+from app.repositories.sale import sale_repo
 
 router = APIRouter(prefix="/payments", tags=["Payments"])
 
 
 @router.post("/", response_model=PaymentResponse, status_code=status.HTTP_201_CREATED)
 def create_payment(payload: PaymentCreate, db: Session = Depends(get_db)):
+    if not sale_repo.get_by_id(db, payload.sale_id):
+        raise HTTPException(status_code=404, detail="Sale not found")
     return payment_repo.create(db, payload.model_dump())
 
 

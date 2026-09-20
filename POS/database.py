@@ -2,7 +2,9 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:student@localhost:5432/pos_db")
+DATABASE_URL = os.getenv(
+    "DATABASE_URL", "postgresql+psycopg://postgres:student@localhost:5432/pos_db"
+)
 engine_kwargs = {}
 
 if DATABASE_URL.startswith("sqlite"):
